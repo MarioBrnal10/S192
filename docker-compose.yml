@@ -4,17 +4,19 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'admin'
     volumes:
       - ./database_students.sql:/docker-entrypoint-initdb.d/database_students.sql
     ports:
-      - "3307:3306"
+      - "3306:3306"
 
   pythonapp:
     build: .
     depends_on:
       - mysql
     ports:
-      - "4000:5000"
+      - "8080:5000"
     volumes:
       - .:/app
     environment:
